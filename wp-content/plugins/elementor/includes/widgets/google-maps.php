@@ -41,7 +41,7 @@ class Widget_Google_Maps extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return esc_html__( 'Google Maps', 'elementor' );
+		return __( 'Google Maps', 'elementor' );
 	}
 
 	/**
@@ -100,7 +100,7 @@ class Widget_Google_Maps extends Widget_Base {
 		$this->start_controls_section(
 			'section_map',
 			[
-				'label' => esc_html__( 'Map', 'elementor' ),
+				'label' => __( 'Map', 'elementor' ),
 			]
 		);
 
@@ -113,7 +113,7 @@ class Widget_Google_Maps extends Widget_Base {
 					[
 						'type' => Controls_Manager::RAW_HTML,
 						'raw' => sprintf(
-							esc_html__( 'Set your Google Maps API Key in Elementor\'s <a href="%1$s" target="_blank">Integrations Settings</a> page. Create your key <a href="%2$s" target="_blank">here.', 'elementor' ),
+							__( 'Set your Google Maps API Key in Elementor\'s <a href="%1$s" target="_blank">Integrations Settings</a> page. Create your key <a href="%2$s" target="_blank">here.', 'elementor' ),
 							Settings::get_url() . '#tab-integrations',
 							'https://developers.google.com/maps/documentation/embed/get-api-key'
 						),
@@ -123,11 +123,11 @@ class Widget_Google_Maps extends Widget_Base {
 			}
 		}
 
-		$default_address = esc_html__( 'London Eye, London, United Kingdom', 'elementor' );
+		$default_address = __( 'London Eye, London, United Kingdom', 'elementor' );
 		$this->add_control(
 			'address',
 			[
-				'label' => esc_html__( 'Location', 'elementor' ),
+				'label' => __( 'Location', 'elementor' ),
 				'type' => Controls_Manager::TEXT,
 				'dynamic' => [
 					'active' => true,
@@ -144,7 +144,7 @@ class Widget_Google_Maps extends Widget_Base {
 		$this->add_control(
 			'zoom',
 			[
-				'label' => esc_html__( 'Zoom', 'elementor' ),
+				'label' => __( 'Zoom', 'elementor' ),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 10,
@@ -162,7 +162,7 @@ class Widget_Google_Maps extends Widget_Base {
 		$this->add_responsive_control(
 			'height',
 			[
-				'label' => esc_html__( 'Height', 'elementor' ),
+				'label' => __( 'Height', 'elementor' ),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -184,7 +184,7 @@ class Widget_Google_Maps extends Widget_Base {
 		$this->add_control(
 			'view',
 			[
-				'label' => esc_html__( 'View', 'elementor' ),
+				'label' => __( 'View', 'elementor' ),
 				'type' => Controls_Manager::HIDDEN,
 				'default' => 'traditional',
 			]
@@ -195,7 +195,7 @@ class Widget_Google_Maps extends Widget_Base {
 		$this->start_controls_section(
 			'section_map_style',
 			[
-				'label' => esc_html__( 'Map', 'elementor' ),
+				'label' => __( 'Map', 'elementor' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -204,7 +204,7 @@ class Widget_Google_Maps extends Widget_Base {
 
 		$this->start_controls_tab( 'normal',
 			[
-				'label' => esc_html__( 'Normal', 'elementor' ),
+				'label' => __( 'Normal', 'elementor' ),
 			]
 		);
 
@@ -220,7 +220,7 @@ class Widget_Google_Maps extends Widget_Base {
 
 		$this->start_controls_tab( 'hover',
 			[
-				'label' => esc_html__( 'Hover', 'elementor' ),
+				'label' => __( 'Hover', 'elementor' ),
 			]
 		);
 
@@ -235,7 +235,7 @@ class Widget_Google_Maps extends Widget_Base {
 		$this->add_control(
 			'hover_transition',
 			[
-				'label' => esc_html__( 'Transition Duration', 'elementor' ),
+				'label' => __( 'Transition Duration', 'elementor' ),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -280,23 +280,20 @@ class Widget_Google_Maps extends Widget_Base {
 		$params = [
 			rawurlencode( $settings['address'] ),
 			absint( $settings['zoom']['size'] ),
+			esc_attr( $settings['address'] ),
 		];
 
 		if ( $api_key ) {
 			$params[] = $api_key;
 
-			$url = 'https://www.google.com/maps/embed/v1/place?key=%3$s&q=%1$s&amp;zoom=%2$d';
+			$url = 'https://www.google.com/maps/embed/v1/place?key=%4$s&q=%1$s&amp;zoom=%2$d';
 		} else {
 			$url = 'https://maps.google.com/maps?q=%1$s&amp;t=m&amp;z=%2$d&amp;output=embed&amp;iwloc=near';
 		}
 
 		?>
 		<div class="elementor-custom-embed">
-			<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-					src="<?php echo esc_url( vsprintf( $url, $params ) ); ?>"
-					title="<?php echo esc_attr( $settings['address'] ); ?>"
-					aria-label="<?php echo esc_attr( $settings['address'] ); ?>"
-			></iframe>
+			<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="<?php echo vsprintf( $url, $params ); ?>" title="%3$s" aria-label="%3$s"></iframe>
 		</div>
 		<?php
 	}
