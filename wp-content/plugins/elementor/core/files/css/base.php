@@ -5,13 +5,13 @@ use Elementor\Base_Data_Control;
 use Elementor\Control_Repeater;
 use Elementor\Controls_Manager;
 use Elementor\Controls_Stack;
+use Elementor\Core\Breakpoints\Manager as Breakpoints_Manager;
 use Elementor\Core\Files\Base as Base_File;
 use Elementor\Core\DynamicTags\Manager;
 use Elementor\Core\DynamicTags\Tag;
 use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Element_Base;
 use Elementor\Plugin;
-use Elementor\Core\Responsive\Responsive;
 use Elementor\Stylesheet;
 use Elementor\Icons_Manager;
 
@@ -103,20 +103,6 @@ abstract class Base extends Base_File {
 	}
 
 	/**
-	 * CSS file constructor.
-	 *
-	 * Initializing Elementor CSS file.
-	 *
-	 * @since 1.2.0
-	 * @access public
-	 */
-	public function __construct( $file_name ) {
-		parent::__construct( $file_name );
-
-		$this->init_stylesheet();
-	}
-
-	/**
 	 * Use external file.
 	 *
 	 * Whether to use external CSS file of not. When there are new schemes or settings
@@ -186,7 +172,20 @@ abstract class Base extends Base_File {
 	public function delete() {
 		if ( $this->use_external_file() ) {
 			parent::delete();
+		} else {
+			$this->delete_meta();
 		}
+	}
+
+	/**
+	 * Get Responsive Control Duplication Mode
+	 *
+	 * @since 3.4.0
+	 *
+	 * @return string
+	 */
+	protected function get_responsive_control_duplication_mode() {
+		return 'on';
 	}
 
 	/**
@@ -327,6 +326,8 @@ abstract class Base extends Base_File {
 			}
 		}
 
+		$stylesheet = $this->get_stylesheet();
+
 		foreach ( $control['selectors'] as $selector => $css_property ) {
 			$output_css_property = '';
 
@@ -398,7 +399,7 @@ abstract class Base extends Base_File {
 				$pure_device_rules = $pure_device_rules[1];
 
 				foreach ( $pure_device_rules as $device_rule ) {
-					if ( Element_Base::RESPONSIVE_DESKTOP === $device_rule ) {
+					if ( Breakpoints_Manager::BREAKPOINT_KEY_DESKTOP === $device_rule ) {
 						continue;
 					}
 
@@ -415,12 +416,12 @@ abstract class Base extends Base_File {
 			if ( ! $query && ! empty( $control['responsive'] ) ) {
 				$query = array_intersect_key( $control['responsive'], array_flip( [ 'min', 'max' ] ) );
 
-				if ( ! empty( $query['max'] ) && Element_Base::RESPONSIVE_DESKTOP === $query['max'] ) {
+				if ( ! empty( $query['max'] ) && Breakpoints_Manager::BREAKPOINT_KEY_DESKTOP === $query['max'] ) {
 					unset( $query['max'] );
 				}
 			}
 
-			$this->stylesheet_obj->add_rules( $parsed_selector, $output_css_property, $query );
+			$stylesheet->add_rules( $parsed_selector, $output_css_property, $query );
 		}
 	}
 
@@ -476,6 +477,10 @@ abstract class Base extends Base_File {
 	 * @return Stylesheet The stylesheet object.
 	 */
 	public function get_stylesheet() {
+		if ( ! $this->stylesheet_obj ) {
+			$this->init_stylesheet();
+		}
+
 		return $this->stylesheet_obj;
 	}
 
@@ -620,6 +625,10 @@ abstract class Base extends Base_File {
 	 * @access protected
 	 */
 	protected function parse_content() {
+		$initial_responsive_controls_duplication_mode = Plugin::$instance->breakpoints->get_responsive_control_duplication_mode();
+
+		Plugin::$instance->breakpoints->set_responsive_control_duplication_mode( $this->get_responsive_control_duplication_mode() );
+
 		$this->render_css();
 
 		$name = $this->get_name();
@@ -637,7 +646,9 @@ abstract class Base extends Base_File {
 		 */
 		do_action( "elementor/css-file/{$name}/parse", $this );
 
-		return $this->stylesheet_obj->__toString();
+		Plugin::$instance->breakpoints->set_responsive_control_duplication_mode( $initial_responsive_controls_duplication_mode );
+
+		return $this->get_stylesheet()->__toString();
 	}
 
 	/**
@@ -708,12 +719,11 @@ abstract class Base extends Base_File {
 	private function init_stylesheet() {
 		$this->stylesheet_obj = new Stylesheet();
 
-		$breakpoints = Responsive::get_breakpoints();
+		$active_breakpoints = Plugin::$instance->breakpoints->get_active_breakpoints();
 
-		$this->stylesheet_obj
-			->add_device( 'mobile', 0 )
-			->add_device( 'tablet', $breakpoints['md'] )
-			->add_device( 'desktop', $breakpoints['lg'] );
+		foreach ( $active_breakpoints as $breakpoint_name => $breakpoint ) {
+			$this->stylesheet_obj->add_device( $breakpoint_name, $breakpoint->get_value() );
+		}
 	}
 
 	/**
@@ -780,7 +790,15 @@ abstract class Base extends Base_File {
 		$id = $global_args[1];
 
 		if ( ! empty( $control['groupType'] ) ) {
-			$property_name = str_replace( [ $control['groupPrefix'], '_tablet', '_mobile' ], '', $control['name'] );
+			$strings_to_replace = [ $control['groupPrefix'] ];
+
+			$active_breakpoint_keys = array_keys( Plugin::$instance->breakpoints->get_active_breakpoints() );
+
+			foreach ( $active_breakpoint_keys as $breakpoint ) {
+				$strings_to_replace[] = '_' . $breakpoint;
+			}
+
+			$property_name = str_replace( $strings_to_replace, '', $control['name'] );
 
 			// TODO: This check won't retrieve the proper answer for array values (multiple controls).
 			if ( empty( $data['value'][ Global_Typography::TYPOGRAPHY_GROUP_PREFIX . $property_name ] ) ) {
@@ -790,6 +808,14 @@ abstract class Base extends Base_File {
 			$property_name = str_replace( '_', '-', $property_name );
 
 			$value = "var( --e-global-$control[groupType]-$id-$property_name )";
+
+			if ( $control['groupPrefix'] . 'font_family' === $control['name'] ) {
+				$default_generic_fonts = Plugin::$instance->kits_manager->get_current_settings( 'default_generic_fonts' );
+
+				if ( $default_generic_fonts ) {
+					$value  .= ", $default_generic_fonts";
+				}
+			}
 		} else {
 			$value = "var( --e-global-$control[type]-$id )";
 		}
