@@ -5,7 +5,6 @@ use Elementor\Core\Utils\Http;
 use Elementor\Core\Utils\Collection;
 use Elementor\Core\Admin\Admin_Notices;
 use Elementor\Core\Common\Modules\Connect\Admin;
-use Elementor\Core\Utils\Str;
 use Elementor\Plugin;
 use Elementor\Tracker;
 
@@ -249,7 +248,9 @@ abstract class Base_App {
 			'nonce' => wp_create_nonce( $this->get_slug() . $action ),
 		] + $params;
 
-		$admin_url = Str::encode_idn_url( get_admin_url() );
+		// Encode base url, the encode is limited to 64 chars.
+		$admin_url = \Requests_IDNAEncoder::encode( get_admin_url() );
+
 		$admin_url .= 'admin.php?page=' . Admin::PAGE_ID;
 
 		return add_query_arg( $params, $admin_url );
@@ -570,13 +571,7 @@ abstract class Base_App {
 			return;
 		}
 
-		$response = $this->request(
-			'get_client_id',
-			[
-				// phpcs:ignore WordPress.Security.NonceVerification
-				'source' => isset( $_REQUEST['source'] ) ? esc_attr( $_REQUEST['source'] ) : '',
-			]
-		);
+		$response = $this->request( 'get_client_id' );
 
 		if ( is_wp_error( $response ) ) {
 			// PHPCS - the variable $response does not contain a user input value.

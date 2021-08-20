@@ -1,4 +1,4 @@
-/*! elementor - v3.4.2 - 19-08-2021 */
+/*! elementor - v3.4.0 - 15-08-2021 */
 (self["webpackChunkelementor"] = self["webpackChunkelementor"] || []).push([["kit-library"],{
 
 /***/ "../core/app/modules/kit-library/assets/js/components/badge.scss":
@@ -1806,9 +1806,7 @@ function fetchContentTypes() {
   }, {
     id: 'site-parts',
     label: __('Site Parts', 'elementor'),
-    doc_types: ['archive', 'error-404', 'footer', 'header', 'search-results', 'single-page', 'single-post', // WooCommerce types
-    'product', 'product-archive', // Legacy Types
-    '404', 'single'],
+    doc_types: ['header', 'footer', 'single', 'archive', '404'],
     order: 1
   }, {
     id: 'popup',
@@ -4245,4 +4243,4 @@ Preview.propTypes = {
 /***/ })
 
 }]);
-//# sourceMappingURL=kit-library.4391d962692aeecda55f.bundle.js.map
+//# sourceMappingURL=kit-library.192658d419d728def980.bundle.js.map

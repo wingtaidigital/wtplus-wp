@@ -126,22 +126,13 @@ class Element_Column extends Element_Base {
 		);
 
 		$active_breakpoint_keys = array_reverse( array_keys( Plugin::$instance->breakpoints->get_active_breakpoints() ) );
-		$inline_size_device_args = [
-			Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [ 'placeholder' => 100 ],
-		];
+		$inline_size_device_args = [];
 
 		foreach ( $active_breakpoint_keys as $breakpoint_key ) {
-			if ( ! isset( $inline_size_device_args[ $breakpoint_key ] ) ) {
-				$inline_size_device_args[ $breakpoint_key ] = [];
-			}
-
-			$inline_size_device_args[ $breakpoint_key ] = array_merge_recursive(
-				$inline_size_device_args[ $breakpoint_key ],
-				[
-					'max' => 100,
-					'required' => false,
-				]
-			);
+			$inline_size_device_args[ $breakpoint_key ] = [
+				'max' => 100,
+				'required' => false,
+			];
 		}
 
 		if ( in_array( Breakpoints_Manager::BREAKPOINT_KEY_MOBILE_EXTRA, $active_breakpoint_keys, true ) ) {

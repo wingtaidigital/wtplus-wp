@@ -104,19 +104,18 @@ class Control_Dimensions extends Control_Base_Units {
 								// PHPCS - the variable $dimension_key is a plain text.
 								echo $dimension_key; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							?>" placeholder="<#
-								placeholder = view.getControlPlaceholder();
-								if ( _.isObject( placeholder ) ) {
-									if ( ! _.isUndefined( placeholder.<?php
+								if ( _.isObject( data.placeholder ) ) {
+									if ( ! _.isUndefined( data.placeholder.<?php
 										// PHPCS - the variable $dimension_key is a plain text.
 										echo $dimension_key; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 									?> ) ) {
-										print( placeholder.<?php
+										print( data.placeholder.<?php
 											// PHPCS - the variable $dimension_key is a plain text.
 											echo $dimension_key; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 										?> );
 									}
 								} else {
-								print( placeholder );
+								print( data.placeholder );
 								} #>"
 							<# if ( -1 === _.indexOf( allowed_dimensions, '<?php
 								// PHPCS - the variable $dimension_key is a plain text.
