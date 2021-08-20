@@ -5,7 +5,6 @@ use Elementor\Core\Base\App as BaseApp;
 use Elementor\Core\Settings\Manager as SettingsManager;
 use Elementor\Plugin;
 use Elementor\TemplateLibrary\Source_Local;
-use Elementor\Utils;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -50,11 +49,6 @@ class App extends BaseApp {
 			return $menu;
 		}
 
-		// Non admin role / custom wp menu.
-		if ( empty( $submenu[ Source_Local::ADMIN_MENU_SLUG ] ) ) {
-			return $menu;
-		}
-
 		// Hack to add a link to sub menu.
 		foreach ( $submenu[ Source_Local::ADMIN_MENU_SLUG ] as &$item ) {
 			if ( self::PAGE_ID === $item[2] ) {
@@ -91,7 +85,6 @@ class App extends BaseApp {
 			'menu_url' => $this->get_base_url() . '#site-editor/promotion',
 			'assets_url' => ELEMENTOR_ASSETS_URL,
 			'return_url' => isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : admin_url(),
-			'hasPro' => Utils::has_pro(),
 		];
 	}
 
@@ -136,17 +129,10 @@ class App extends BaseApp {
 		Plugin::$instance->common->register_scripts();
 
 		wp_register_style(
-			'select2',
-			$this->get_css_assets_url( 'e-select2', 'assets/lib/e-select2/css/' ),
-			[],
-			'4.0.6-rc.1'
-		);
-
-		wp_register_style(
 			'elementor-icons',
 			$this->get_css_assets_url( 'elementor-icons', 'assets/lib/eicons/css/' ),
 			[],
-			'5.11.0'
+			'5.6.2'
 		);
 
 		wp_register_style(
@@ -156,21 +142,12 @@ class App extends BaseApp {
 			ELEMENTOR_VERSION
 		);
 
-		wp_register_style(
-			'select2',
-			ELEMENTOR_ASSETS_URL . 'lib/e-select2/css/e-select2.css',
-			[],
-			'4.0.6-rc.1'
-		);
-
 		wp_enqueue_style(
 			'elementor-app',
 			$this->get_css_assets_url( 'app', null, 'default', true ),
 			[
-				'select2',
 				'elementor-icons',
 				'elementor-common',
-				'select2',
 			],
 			ELEMENTOR_VERSION
 		);
@@ -186,25 +163,12 @@ class App extends BaseApp {
 			true
 		);
 
-		wp_register_script(
-			'select2',
-			$this->get_js_assets_url( 'e-select2.full', 'assets/lib/e-select2/js/' ),
-			[
-				'jquery',
-			],
-			'4.0.6-rc.1',
-			true
-		);
-
 		wp_enqueue_script(
 			'elementor-app',
 			$this->get_js_assets_url( 'app' ),
 			[
-				'wp-url',
-				'wp-i18n',
 				'react',
 				'react-dom',
-				'select2',
 			],
 			ELEMENTOR_VERSION,
 			true
@@ -212,8 +176,7 @@ class App extends BaseApp {
 
 		$this->enqueue_dark_theme_detection_script();
 
-		wp_set_script_translations( 'elementor-app-packages', 'elementor' );
-		wp_set_script_translations( 'elementor-app', 'elementor' );
+		wp_set_script_translations( 'elementor-app', 'elementor', ELEMENTOR_PATH . 'languages' );
 
 		$this->print_config();
 	}
@@ -234,13 +197,6 @@ class App extends BaseApp {
 
 	public function __construct() {
 		$this->add_component( 'site-editor', new Modules\SiteEditor\Module() );
-
-		if ( current_user_can( 'manage_options' ) && Plugin::$instance->experiments->is_feature_active( 'e_import_export' ) || Utils::is_wp_cli() ) {
-			$this->add_component( 'import-export', new Modules\ImportExport\Module() );
-
-			// Kit library is depended on import-export
-			$this->add_component( 'kit-library', new Modules\KitLibrary\Module() );
-		}
 
 		add_action( 'admin_menu', [ $this, 'register_admin_menu' ], 21 /* after Elementor page */ );
 

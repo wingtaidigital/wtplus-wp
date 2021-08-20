@@ -37,7 +37,17 @@ class Page extends Library_Document {
 		return $properties;
 	}
 
-	public static function get_type() {
+	/**
+	 * Get document name.
+	 *
+	 * Retrieve the document name.
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return string Document name.
+	 */
+	public function get_name() {
 		return 'page';
 	}
 
@@ -56,10 +66,6 @@ class Page extends Library_Document {
 		return __( 'Page', 'elementor' );
 	}
 
-	public static function get_plural_title() {
-		return __( 'Pages', 'elementor' );
-	}
-
 	/**
 	 * @since 2.1.3
 	 * @access public
@@ -69,11 +75,11 @@ class Page extends Library_Document {
 	}
 
 	/**
-	 * @since 3.1.0
+	 * @since 2.0.0
 	 * @access protected
 	 */
-	protected function register_controls() {
-		parent::register_controls();
+	protected function _register_controls() {
+		parent::_register_controls();
 
 		Post::register_hide_title_control( $this );
 

@@ -459,17 +459,20 @@ class Manager {
 	 * @return mixed Whether the export succeeded or failed.
 	 */
 	public function import_template( array $data ) {
-		// Imported templates can be either JSON files, or Zip files containing multiple JSON files
-		$upload_result = Plugin::$instance->uploads_manager->handle_elementor_upload( $data, [ 'zip', 'json' ] );
+		/** @var Source_Local $source */
+		$file_content = base64_decode( $data['fileData'] );
 
-		if ( is_wp_error( $upload_result ) ) {
-			return $upload_result;
-		}
+		$tmp_file = tmpfile();
 
-		/** @var Source_Local $source_local */
-		$source_local = $this->get_source( 'local' );
+		fwrite( $tmp_file, $file_content );
 
-		return $source_local->import_template( $upload_result['name'], $upload_result['tmp_name'] );
+		$source = $this->get_source( 'local' );
+
+		$result = $source->import_template( $data['fileName'], stream_get_meta_data( $tmp_file )['uri'] );
+
+		fclose( $tmp_file );
+
+		return $result;
 	}
 
 	/**

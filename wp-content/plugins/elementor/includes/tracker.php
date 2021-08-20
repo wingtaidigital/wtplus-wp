@@ -266,36 +266,6 @@ class Tracker {
 	}
 
 	/**
-	 * Get non elementor post usages.
-	 *
-	 * Retrieve the number of posts that not using elementor.
-
-	 * @return array The number of posts using not used by Elementor grouped by post types
-	 *               and post status.
-	 */
-	public static function get_non_elementor_posts_usage() {
-		global $wpdb;
-
-		$usage = [];
-
-		$results = $wpdb->get_results(
-			"SELECT `post_type`, `post_status`, COUNT(`ID`) `hits`
-				FROM {$wpdb->posts} `p`
-				LEFT JOIN {$wpdb->postmeta} `pm` ON(`p`.`ID` = `pm`.`post_id` AND  `meta_key` = '_elementor_edit_mode' )
-				WHERE `post_type` != 'elementor_library' AND `meta_value` IS NULL
-				GROUP BY `post_type`, `post_status`;"
-		);
-
-		if ( $results ) {
-			foreach ( $results as $result ) {
-				$usage[ $result->post_type ][ $result->post_status ] = $result->hits;
-			}
-		}
-
-		return $usage;
-	}
-
-	/**
 	 * Get posts usage.
 	 *
 	 * Retrieve the number of posts using Elementor.
@@ -328,6 +298,7 @@ class Tracker {
 		}
 
 		return $usage;
+
 	}
 
 	/**
@@ -371,21 +342,20 @@ class Tracker {
 	 *
 	 * Retrieve tracking data and apply filter
 	 *
-	 * @access public
+	 * @access private
 	 * @static
 	 *
 	 * @param bool $is_first_time
 	 *
 	 * @return array
 	 */
-	public static function get_tracking_data( $is_first_time = false ) {
+	private static function get_tracking_data( $is_first_time = false ) {
 		$params = [
 			'system' => self::get_system_reports_data(),
 			'site_lang' => get_bloginfo( 'language' ),
 			'email' => get_option( 'admin_email' ),
 			'usages' => [
 				'posts' => self::get_posts_usage(),
-				'non-elementor-posts' => self::get_non_elementor_posts_usage(),
 				'library' => self::get_library_usage(),
 			],
 			'is_first_time' => $is_first_time,

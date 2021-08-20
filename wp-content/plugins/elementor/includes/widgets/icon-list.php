@@ -78,10 +78,10 @@ class Widget_Icon_List extends Widget_Base {
 	 *
 	 * Adds different input fields to allow the user to change and customize the widget settings.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @access protected
 	 */
-	protected function register_controls() {
+	protected function _register_controls() {
 		$this->start_controls_section(
 			'section_icon',
 			[
@@ -529,14 +529,6 @@ class Widget_Icon_List extends Widget_Base {
 			]
 		);
 
-		$this->add_group_control(
-			Group_Control_Text_Shadow::get_type(),
-			[
-				'name' => 'text_shadow',
-				'selector' => '{{WRAPPER}} .elementor-icon-list-text',
-			]
-		);
-
 		$this->end_controls_section();
 	}
 
@@ -574,7 +566,7 @@ class Widget_Icon_List extends Widget_Base {
 				$this->add_inline_editing_attributes( $repeater_setting_key );
 				$migration_allowed = Icons_Manager::is_migration_allowed();
 				?>
-				<li <?php echo $this->get_render_attribute_string( 'list_item' ); ?>>
+				<li class="elementor-icon-list-item" >
 					<?php
 					if ( ! empty( $item['link']['url'] ) ) {
 						$link_key = 'link_' . $index;

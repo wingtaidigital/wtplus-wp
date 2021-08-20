@@ -2,7 +2,6 @@
 
 namespace Elementor\Core\Base;
 
-use Elementor\Core\Admin\Admin_Notices;
 use Elementor\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -53,9 +52,7 @@ abstract class DB_Upgrades_Manager extends Background_Task_Manager {
 	public function on_runner_start() {
 		parent::on_runner_start();
 
-		if ( ! defined( 'IS_ELEMENTOR_UPGRADE' ) ) {
-			define( 'IS_ELEMENTOR_UPGRADE', true );
-		}
+		define( 'IS_ELEMENTOR_UPGRADE', true );
 	}
 
 	public function on_runner_complete( $did_tasks = false ) {
@@ -79,64 +76,27 @@ abstract class DB_Upgrades_Manager extends Background_Task_Manager {
 	}
 
 	public function admin_notice_start_upgrade() {
-		/**
-		 * @var Admin_Notices $admin_notices
-		 */
-		$admin_notices = Plugin::$instance->admin->get_component( 'admin-notices' );
+		$upgrade_link = $this->get_start_action_url();
+		$message = '<p>' . sprintf( __( '%s Your site database needs to be updated to the latest version.', 'elementor' ), $this->get_updater_label() ) . '</p>';
+		$message .= '<p>' . sprintf( '<a href="%s" class="button-primary">%s</a>', $upgrade_link, __( 'Update Now', 'elementor' ) ) . '</p>';
 
-		$options = [
-			'title' => $this->get_updater_label(),
-			'description' => __( 'Your site database needs to be updated to the latest version.', 'elementor' ),
-			'type' => 'error',
-			'icon' => false,
-			'button' => [
-				'text' => __( 'Update Now', 'elementor' ),
-				'url' => $this->get_start_action_url(),
-				'class' => 'e-button e-button--cta',
-			],
-		];
-
-		$admin_notices->print_admin_notice( $options );
+		echo '<div class="notice notice-error">' . $message . '</div>';
 	}
 
 	public function admin_notice_upgrade_is_running() {
-		/**
-		 * @var Admin_Notices $admin_notices
-		 */
-		$admin_notices = Plugin::$instance->admin->get_component( 'admin-notices' );
+		$upgrade_link = $this->get_continue_action_url();
+		$message = '<p>' . sprintf( __( '%s Database update process is running in the background.', 'elementor' ), $this->get_updater_label() ) . '</p>';
+		$message .= '<p>' . __( 'Taking a while?', 'elementor' ) . '<a href="' . $upgrade_link . '" class="button-primary">' . __( 'Click here to run it now', 'elementor' ) . '</a></p>';
 
-		$options = [
-			'title' => $this->get_updater_label(),
-			'description' => __( 'Database update process is running in the background. Taking a while?', 'elementor' ),
-			'type' => 'warning',
-			'icon' => false,
-			'button' => [
-				'text' => __( 'Click here to run it now', 'elementor' ),
-				'url' => $this->get_continue_action_url(),
-				'class' => 'e-button e-button--primary',
-			],
-		];
-
-		$admin_notices->print_admin_notice( $options );
+		echo '<div class="notice notice-warning">' . $message . '</div>';
 	}
 
 	public function admin_notice_upgrade_is_completed() {
 		$this->delete_flag( 'completed' );
 
-		$message = __( 'The database update process is now complete. Thank you for updating to the latest version!', 'elementor' );
+		$message = '<p>' . sprintf( __( '%s The database update process is now complete. Thank you for updating to the latest version!', 'elementor' ), $this->get_updater_label() ) . '</p>';
 
-		/**
-		 * @var Admin_Notices $admin_notices
-		 */
-		$admin_notices = Plugin::$instance->admin->get_component( 'admin-notices' );
-
-		$options = [
-			'description' => '<b>' . $this->get_updater_label() . '</b> - ' . $message,
-			'type' => 'success',
-			'icon' => false,
-		];
-
-		$admin_notices->print_admin_notice( $options );
+		echo '<div class="notice notice-success">' . $message . '</div>';
 	}
 
 	/**
@@ -186,12 +146,6 @@ abstract class DB_Upgrades_Manager extends Background_Task_Manager {
 
 		foreach ( $upgrades_reflection->getMethods() as $method ) {
 			$method_name = $method->getName();
-
-			if ( '_on_each_version' === $method_name ) {
-				$callbacks[] = [ $upgrades_class, $method_name ];
-				continue;
-			}
-
 			if ( false === strpos( $method_name, $prefix ) ) {
 				continue;
 			}

@@ -1,6 +1,7 @@
 <?php
 namespace Elementor;
 
+use Elementor\Core\Upgrade\Manager as Upgrades_Manager;
 use Elementor\TemplateLibrary\Source_Local;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -132,17 +133,6 @@ class Settings extends Settings_Page {
 	public function register_pro_menu() {
 		add_submenu_page(
 			self::PAGE_ID,
-			__( 'Submissions', 'elementor' ),
-			__( 'Submissions', 'elementor' ),
-			'manage_options',
-			'e-form-submissions',
-			function() {
-				$this->elementor_form_submissions();
-			}
-		);
-
-		add_submenu_page(
-			self::PAGE_ID,
 			__( 'Custom Fonts', 'elementor' ),
 			__( 'Custom Fonts', 'elementor' ),
 			'manage_options',
@@ -272,7 +262,7 @@ class Settings extends Settings_Page {
 
 						<div class="e-getting-started__actions e-getting-started__content--narrow">
 							<?php if ( ! empty( $create_new_cpt ) ) : ?>
-							<a href="<?php echo esc_url( Plugin::$instance->documents->get_create_new_post_url( $create_new_cpt ) ); ?>" class="button button-primary button-hero"><?php echo esc_html( $create_new_label ); ?></a>
+							<a href="<?php echo esc_url( Utils::get_create_new_post_url( $create_new_cpt ) ); ?>" class="button button-primary button-hero"><?php echo esc_html( $create_new_label ); ?></a>
 							<?php endif; ?>
 
 							<a href="https://go.elementor.com/getting-started/" target="_blank" class="button button-secondary button-hero"><?php echo __( 'Watch the Full Guide', 'elementor' ); ?></a>
@@ -338,29 +328,10 @@ class Settings extends Settings_Page {
 		?>
 		<div class="wrap">
 			<div class="elementor-blank_state">
-				<img src="<?php echo ELEMENTOR_ASSETS_URL . 'images/go-pro-wp-dashboard.svg'; ?>" />
+				<i class="eicon-nerd-chuckle"></i>
 				<h2><?php echo __( 'Get Popup Builder', 'elementor' ); ?></h2>
 				<p><?php echo __( 'Popup Builder lets you take advantage of all the amazing features in Elementor, so you can build beautiful & highly converting popups. Go pro and start designing your popups today.', 'elementor' ); ?></p>
 				<a class="elementor-button elementor-button-default elementor-button-go-pro" target="_blank" href="<?php echo Utils::get_pro_link( 'https://elementor.com/popup-builder/?utm_source=popup-templates&utm_campaign=gopro&utm_medium=wp-dash' ); ?>"><?php echo __( 'Go Pro', 'elementor' ); ?></a>
-			</div>
-		</div><!-- /.wrap -->
-		<?php
-	}
-
-	public function elementor_form_submissions() {
-		?>
-		<div class="wrap">
-			<div class="elementor-blank_state">
-				<img src="<?php echo ELEMENTOR_ASSETS_URL . 'images/go-pro-wp-dashboard.svg'; ?>" />
-				<h2><?php echo __( 'Collect Your Form Submissions', 'elementor' ); ?></h2>
-				<p>
-					<?php echo __( 'Save and manage all of your form submissions in one single place.
-All within a simple, intuitive place.', 'elementor' ); ?>
-					<a href="http://go.elementor.com/wp-dash-submissions" target="_blank" rel="nofollow">
-						<?php echo __( 'Learn More', 'elementor' ); ?>
-					</a>
-				</p>
-				<a class="elementor-button elementor-button-default elementor-button-go-pro" target="_blank" href="<?php echo Utils::get_pro_link( 'https://go.elementor.com/go-pro-submissions' ); ?>"><?php echo __( 'Go Pro', 'elementor' ); ?></a>
 			</div>
 		</div><!-- /.wrap -->
 		<?php
@@ -393,7 +364,13 @@ All within a simple, intuitive place.', 'elementor' ); ?>
 	 * @access public
 	 */
 	public function admin_menu_change_name() {
-		Utils::change_submenu_first_item_label( 'elementor', __( 'Settings', 'elementor' ) );
+		global $submenu;
+
+		if ( isset( $submenu['elementor'] ) ) {
+			// @codingStandardsIgnoreStart
+			$submenu['elementor'][0][0] = __( 'Settings', 'elementor' );
+			// @codingStandardsIgnoreEnd
+		}
 	}
 
 	/**
@@ -467,7 +444,18 @@ All within a simple, intuitive place.', 'elementor' ); ?>
 					],
 					'usage' => [
 						'label' => __( 'Improve Elementor', 'elementor' ),
-						'fields' => $this->get_usage_fields(),
+						'fields' => [
+							'allow_tracking' => [
+								'label' => __( 'Usage Data Sharing', 'elementor' ),
+								'field_args' => [
+									'type' => 'checkbox',
+									'value' => 'yes',
+									'default' => '',
+									'sub_desc' => __( 'Become a super contributor by opting in to share non-sensitive plugin data and to receive periodic email updates from us.', 'elementor' ) . sprintf( ' <a href="%1$s" target="_blank">%2$s</a>', 'https://go.elementor.com/usage-data-tracking/', __( 'Learn more.', 'elementor' ) ),
+								],
+								'setting_args' => [ __NAMESPACE__ . '\Tracker', 'check_for_settings_optin' ],
+							],
+						],
 					],
 				],
 			],
@@ -480,7 +468,7 @@ All within a simple, intuitive place.', 'elementor' ); ?>
 								'label' => __( 'Looking for the Style settings?', 'elementor' ),
 								'field_args' => [
 									'type' => 'raw_html',
-									'html' => __( 'The Style settings changed its location and can now be found within Elementor Editor\'s <b>Panel > Hamburger Menu > Site Settings</b>.<br>You can use the Site Settings to make changes and see them live!', 'elementor' ) . sprintf( ' <a target="_blank" href="http://go.elementor.com/panel-layout-settings">%s</a>', __( 'Learn More', 'elementor' ) ),
+									'html' => __( 'The Style settings changed its location and can now be found within Elementor Editor\'s <b>Settings Panel > Hamburger Menu > Global Settings</b>.<br>You can use the Global Manager to make changes and see them live!', 'elementor' ) . sprintf( ' <a target="_blank" href="http://go.elementor.com/panel-layout-settings">%s</a>', __( 'Learn More', 'elementor' ) ),
 								],
 							],
 						],
@@ -489,23 +477,7 @@ All within a simple, intuitive place.', 'elementor' ); ?>
 			],
 			self::TAB_INTEGRATIONS => [
 				'label' => __( 'Integrations', 'elementor' ),
-				'sections' => [
-					'google_maps' => [
-						'label' => __( 'Google Maps Embed API', 'elementor' ),
-						'callback' => function() {
-							printf( __( 'Google Maps Embed API is a free service by Google that allows embedding Google Maps in your site. For more details, visit Google Maps\' <a href="%s" target="_blank">Using API Keys</a> page.', 'elementor' ), esc_url( 'https://developers.google.com/maps/documentation/embed/get-api-key' ) );
-						},
-						'fields' => [
-							'google_maps_api_key' => [
-								'label' => __( 'API Key', 'elementor' ),
-								'field_args' => [
-									'class' => 'elementor_google_maps_api_key',
-									'type' => 'text',
-								],
-							],
-						],
-					],
-				],
+				'sections' => [],
 			],
 			self::TAB_ADVANCED => [
 				'label' => __( 'Advanced', 'elementor' ),
@@ -547,19 +519,17 @@ All within a simple, intuitive place.', 'elementor' ); ?>
 									'desc' => __( 'Please note! Allowing uploads of any files (SVG & JSON included) is a potential security risk.', 'elementor' ) . '<br>' . __( 'Elementor will try to sanitize the unfiltered files, removing potential malicious code and scripts.', 'elementor' ) . '<br>' . __( 'We recommend you only enable this feature if you understand the security risks involved.', 'elementor' ),
 								],
 							],
-							'font_display' => [
-								'label' => __( 'Google Fonts Load', 'elementor' ),
+							'optimized_dom_output' => [
+								'label' => __( 'Optimized DOM Output', 'elementor' ),
 								'field_args' => [
 									'type' => 'select',
-									'std' => 'auto',
 									'options' => [
-										'auto' => __( 'Default', 'elementor' ),
-										'block' => __( 'Blocking', 'elementor' ),
-										'swap' => __( 'Swap', 'elementor' ),
-										'fallback' => __( 'Fallback', 'elementor' ),
-										'optional' => __( 'Optional', 'elementor' ),
+										'' => __( 'Default', 'elementor' ),
+										'enabled' => __( 'Enable', 'elementor' ),
+										'disabled' => __( 'Disable', 'elementor' ),
 									],
-									'desc' => __( 'Font-display property defines how font files are loaded and displayed by the browser.', 'elementor' ) . '<br>' . __( 'Set the way Google Fonts are being loaded by selecting the font-display property (Default: Auto).', 'elementor' ),
+									'desc' => __( 'Developers, Please Note! If you\'ve used custom code in Elementor, you might have experienced a snippet of code not running. Legacy DOM Output allows you to keep prior Elementor markup output settings, and have that lovely code running again.', 'elementor' )
+										. '<a href="https://go.elementor.com/wp-dash-legacy-optimized-dom" target="_blank"> ' . __( 'Learn More', 'elementor' ) . '</a>',
 								],
 							],
 						],
@@ -622,17 +592,11 @@ All within a simple, intuitive place.', 'elementor' ); ?>
 
 		$clear_cache_callback = [ Plugin::$instance->files_manager, 'clear_cache' ];
 
-		// Clear CSS Meta after change css related methods.
-		$css_settings = [
-			'elementor_disable_color_schemes',
-			'elementor_disable_typography_schemes',
-			'elementor_css_print_method',
-		];
-
-		foreach ( $css_settings as $option_name ) {
-			add_action( "add_option_{$option_name}", $clear_cache_callback );
-			add_action( "update_option_{$option_name}", $clear_cache_callback );
-		}
+		// Clear CSS Meta after change print method.
+		add_action( 'add_option_elementor_css_print_method', $clear_cache_callback );
+		add_action( 'update_option_elementor_css_print_method', $clear_cache_callback );
+		add_action( 'add_option_elementor_optimized_dom_output', $clear_cache_callback );
+		add_action( 'update_option_elementor_optimized_dom_output', $clear_cache_callback );
 
 		add_filter( 'custom_menu_order', '__return_true' );
 		add_filter( 'menu_order', [ $this, 'menu_order' ] );
