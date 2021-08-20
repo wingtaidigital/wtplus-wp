@@ -815,7 +815,7 @@ var breakpoints = eae.breakpoints;
 
                 prependTo: null,
 
-                fixedContentPos: 'auto',
+                fixedContentPos: true,
 
                 fixedBgPos: 'auto',
 

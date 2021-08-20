@@ -48,7 +48,7 @@ class ThumbGallery extends EAE_Widget_Base {
 		];
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 		$this->start_controls_section(
 			'section_gallery',
 			[
@@ -764,6 +764,7 @@ class ThumbGallery extends EAE_Widget_Base {
 				'default'        => 3,
 				'tablet_default' => 3,
 				'mobile_default' => 2,
+				'frontend_available' => true,
 			]
 		);
 
@@ -775,6 +776,7 @@ class ThumbGallery extends EAE_Widget_Base {
 				'default'        => 10,
 				'tablet_default' => 10,
 				'mobile_default' => 5,
+				'frontend_available' => true,
 			]
 		);
 
@@ -974,6 +976,7 @@ class ThumbGallery extends EAE_Widget_Base {
 						'step' => 5,
 					],
 				],
+				'frontend_available' => true,
 			]
 		);
 
@@ -1869,8 +1872,7 @@ class ThumbGallery extends EAE_Widget_Base {
 	}
 
 	protected function render() {
-
-		$settings = $this->get_settings_for_display();
+		$settings = $this->get_settings_for_display();	
 		$slides   = $settings['slides'];
 
 		$slides_per_view['desktop'] = $settings['thumb_slides_per_view'] !== '' ? $settings['thumb_slides_per_view'] : 1;

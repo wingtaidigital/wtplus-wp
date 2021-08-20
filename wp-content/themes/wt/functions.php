@@ -224,3 +224,27 @@ if (!function_exists('wt_dump'))
 		error_log('['.date("d-M-Y H:i:s e").'] ' . $message, 3, WP_CONTENT_DIR . '/' . $filename . '.log');
 	}
 }
+
+if (!function_exists('insta_tag'))
+{
+    add_shortcode( 'insta_tag', 'insta_tag' );
+    function insta_tag() {
+    ?>
+        <section id="instagram" class="row collapse">
+            <div class="column">
+                <h1 class="text-center wt-h2 wt-gutter-half wt-gutter-bottom">What's on @wtplussg</h1>
+
+                <div class="text-center wt-gutter">
+                    <!-- SnapWidget -->
+                    <script src="https://snapwidget.com/js/snapwidget.js"></script>
+                    <iframe src="https://snapwidget.com/embed/928039" class="snapwidget-widget" allowtransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%;"></iframe>
+                </div>
+
+                <div class="text-right wt-gutter">
+                    <a href="https://www.instagram.com/wtplussg/" target="_blank" rel="noreferrer" class="wt-text-hover -wt-gutter-half">VIEW MORE</a>
+                </div>
+            </div>
+        </section>
+    <?php
+    }
+}

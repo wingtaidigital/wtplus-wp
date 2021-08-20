@@ -42,7 +42,7 @@ class Chart extends EAE_Widget_Base {
 	// phpcs:ignore PSR2.Classes.PropertyDeclaration.Underscore
 	protected $_has_template_content = false;
 
-	protected function _register_controls() {
+	protected function register_controls() {
 		$this->start_controls_section(
 			'section_layout',
 			[

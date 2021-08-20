@@ -50,7 +50,7 @@ class DataTable extends EAE_Widget_Base {
 		return [ 'eae-data-table', 'eae-lottie' ];
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		$this->start_controls_section(
 			'eae-table-header-section',

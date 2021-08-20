@@ -35,7 +35,7 @@ class Info_Circle extends EAE_Widget_Base {
 		$this->add_skin( new Skins\Skin_4( $this ) );
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		$this->start_controls_section(
 			'ic_skins',

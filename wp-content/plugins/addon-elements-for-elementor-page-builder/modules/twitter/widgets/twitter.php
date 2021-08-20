@@ -29,7 +29,7 @@ class Twitter extends EAE_Widget_Base {
 	public function get_categories() {
 		return [ 'wts-eae' ];
 	}
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		$this->start_controls_section(
 			'section_general',

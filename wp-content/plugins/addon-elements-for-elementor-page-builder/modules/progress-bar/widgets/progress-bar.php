@@ -34,7 +34,7 @@ class Progress_Bar extends EAE_Widget_Base {
 		$this->add_skin( new Skins\Skin_5( $this ) );
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		$this->start_controls_section(
 			'pb_skins',
@@ -101,7 +101,7 @@ class Progress_Bar extends EAE_Widget_Base {
 		$this->end_controls_section();
 	}
 
-	public function _content_template() {
+	public function content_template() {
 		?>
 		<#
 		var wrapperKey = 'wrapperclass';

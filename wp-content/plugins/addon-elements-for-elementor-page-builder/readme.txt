@@ -124,6 +124,9 @@ New elements are added at the end of the default elementor widget area under the
 8. Elementor addon widgets section
 
 == Changelog ==
+= 1.11.10 =
+* Enhancement : Added compatibility with Elementor 3.4.0
+* Fixed : Modal Popup page scroll on responsive.
 
 = 1.11.9 =
 * Fixed : Wrapper Link Bug.

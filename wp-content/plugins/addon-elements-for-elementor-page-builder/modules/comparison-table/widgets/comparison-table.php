@@ -37,7 +37,7 @@ class ComparisonTable extends EAE_Widget_Base {
 		return [ 'wts-eae' ];
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 		$this->start_controls_section(
 			'section_general',
 			[
@@ -52,7 +52,6 @@ class ComparisonTable extends EAE_Widget_Base {
 				'default'     => 2,
 				'min'         => 2,
 				'max'         => 10,
-				'placeholder' => __( 'Tables', 'wts-eae' ),
 			]
 		);
 
@@ -2165,7 +2164,7 @@ class ComparisonTable extends EAE_Widget_Base {
 		<?php
 	}
 
-	protected function _content_template() {
+	protected function content_template() {
 		?>
 		<# view.addRenderAttribute( 'eae-ct-wrapper' , 'class' , 'eae-ct-wrapper' ); if(settings['feature_box_heading']=='' ){ view.addRenderAttribute( 'eae-ct-wrapper' , 'class' , 'feature-heading-blank' ); } if(settings['button_heading_text']=='' ){ view.addRenderAttribute( 'eae-ct-wrapper' , 'class' , 'button-heading-blank' ); } #>
 			<article {{{ view.getRenderAttributeString('eae-ct-wrapper') }}}>

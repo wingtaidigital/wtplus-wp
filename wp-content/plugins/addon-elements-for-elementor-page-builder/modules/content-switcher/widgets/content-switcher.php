@@ -42,7 +42,7 @@ class Content_Switcher extends EAE_Widget_Base {
 	}
 
 
-	public function _register_controls() {
+	public function register_controls() {
 		$this->start_controls_section(
 			'cs_skins',
 			[
