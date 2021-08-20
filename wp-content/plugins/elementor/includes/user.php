@@ -103,7 +103,7 @@ class User {
 			return false;
 		}
 
-		if ( intval( get_option( 'page_for_posts' ) ) === $post_id ) {
+		if ( get_option( 'page_for_posts' ) === $post_id ) {
 			return false;
 		}
 

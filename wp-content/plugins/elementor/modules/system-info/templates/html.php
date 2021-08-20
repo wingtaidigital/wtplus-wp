@@ -1,6 +1,4 @@
 <?php
-use Elementor\Utils;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -13,7 +11,7 @@ foreach ( $reports as $report_name => $report ) : ?>
 		<table class="widefat">
 			<thead>
 			<tr>
-				<th><?php Utils::print_unescaped_internal_string( $report['label'] ); ?></th>
+				<th><?php echo $report['label']; ?></th>
 				<th></th>
 				<th></th>
 			</tr>
@@ -36,7 +34,7 @@ foreach ( $reports as $report_name => $report ) : ?>
 								$plugin_name .= ' - ' . $plugin_info['Version'];
 							endif;
 
-							Utils::print_unescaped_internal_string( $plugin_name );
+							echo $plugin_name;
 							?></td>
 							<td><?php
 							if ( $plugin_info['Author'] ) :
@@ -46,7 +44,7 @@ foreach ( $reports as $report_name => $report ) : ?>
 									$author = $plugin_info['Author'];
 								endif;
 
-								Utils::print_unescaped_internal_string( "By $author" );
+								echo "By $author";
 							endif;
 							?></td>
 							<td></td>
@@ -57,12 +55,12 @@ foreach ( $reports as $report_name => $report ) : ?>
 					$warning_class = ! empty( $field['warning'] ) ? ' class="elementor-warning"' : '';
 					$log_label = ! empty( $field['label'] ) ? $field['label'] . ':' : '';
 					?>
-					<tr<?php Utils::print_unescaped_internal_string( $warning_class ); ?>>
-						<td><?php Utils::print_unescaped_internal_string( $log_label ); ?></td>
-						<td><?php Utils::print_unescaped_internal_string( $field['value'] ); ?></td>
+					<tr<?php echo $warning_class; ?>>
+						<td><?php echo $log_label; ?></td>
+						<td><?php echo $field['value']; ?></td>
 						<td><?php
 						if ( ! empty( $field['recommendation'] ) ) :
-							Utils::print_unescaped_internal_string( $field['recommendation'] );
+							echo $field['recommendation'];
 						endif;
 						?></td>
 					</tr>

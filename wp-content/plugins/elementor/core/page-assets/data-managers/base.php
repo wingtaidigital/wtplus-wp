@@ -290,7 +290,7 @@ abstract class Base {
 	 *     @type array 'data'
 	 * }
 	 *
-	 * @return mixed
+	 * @return string
 	 */
 	public function get_asset_data( $config ) {
 		$this->init_asset_data( $config );

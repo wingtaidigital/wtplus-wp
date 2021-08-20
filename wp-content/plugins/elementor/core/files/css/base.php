@@ -5,7 +5,6 @@ use Elementor\Base_Data_Control;
 use Elementor\Control_Repeater;
 use Elementor\Controls_Manager;
 use Elementor\Controls_Stack;
-use Elementor\Core\Breakpoints\Manager as Breakpoints_Manager;
 use Elementor\Core\Files\Base as Base_File;
 use Elementor\Core\DynamicTags\Manager;
 use Elementor\Core\DynamicTags\Tag;
@@ -175,17 +174,6 @@ abstract class Base extends Base_File {
 		} else {
 			$this->delete_meta();
 		}
-	}
-
-	/**
-	 * Get Responsive Control Duplication Mode
-	 *
-	 * @since 3.4.0
-	 *
-	 * @return string
-	 */
-	protected function get_responsive_control_duplication_mode() {
-		return 'on';
 	}
 
 	/**
@@ -399,7 +387,7 @@ abstract class Base extends Base_File {
 				$pure_device_rules = $pure_device_rules[1];
 
 				foreach ( $pure_device_rules as $device_rule ) {
-					if ( Breakpoints_Manager::BREAKPOINT_KEY_DESKTOP === $device_rule ) {
+					if ( Element_Base::RESPONSIVE_DESKTOP === $device_rule ) {
 						continue;
 					}
 
@@ -416,7 +404,7 @@ abstract class Base extends Base_File {
 			if ( ! $query && ! empty( $control['responsive'] ) ) {
 				$query = array_intersect_key( $control['responsive'], array_flip( [ 'min', 'max' ] ) );
 
-				if ( ! empty( $query['max'] ) && Breakpoints_Manager::BREAKPOINT_KEY_DESKTOP === $query['max'] ) {
+				if ( ! empty( $query['max'] ) && Element_Base::RESPONSIVE_DESKTOP === $query['max'] ) {
 					unset( $query['max'] );
 				}
 			}
@@ -625,10 +613,6 @@ abstract class Base extends Base_File {
 	 * @access protected
 	 */
 	protected function parse_content() {
-		$initial_responsive_controls_duplication_mode = Plugin::$instance->breakpoints->get_responsive_control_duplication_mode();
-
-		Plugin::$instance->breakpoints->set_responsive_control_duplication_mode( $this->get_responsive_control_duplication_mode() );
-
 		$this->render_css();
 
 		$name = $this->get_name();
@@ -645,8 +629,6 @@ abstract class Base extends Base_File {
 		 * @param Base $this The current CSS file.
 		 */
 		do_action( "elementor/css-file/{$name}/parse", $this );
-
-		Plugin::$instance->breakpoints->set_responsive_control_duplication_mode( $initial_responsive_controls_duplication_mode );
 
 		return $this->get_stylesheet()->__toString();
 	}
@@ -790,15 +772,7 @@ abstract class Base extends Base_File {
 		$id = $global_args[1];
 
 		if ( ! empty( $control['groupType'] ) ) {
-			$strings_to_replace = [ $control['groupPrefix'] ];
-
-			$active_breakpoint_keys = array_keys( Plugin::$instance->breakpoints->get_active_breakpoints() );
-
-			foreach ( $active_breakpoint_keys as $breakpoint ) {
-				$strings_to_replace[] = '_' . $breakpoint;
-			}
-
-			$property_name = str_replace( $strings_to_replace, '', $control['name'] );
+			$property_name = str_replace( [ $control['groupPrefix'], '_tablet', '_mobile' ], '', $control['name'] );
 
 			// TODO: This check won't retrieve the proper answer for array values (multiple controls).
 			if ( empty( $data['value'][ Global_Typography::TYPOGRAPHY_GROUP_PREFIX . $property_name ] ) ) {
