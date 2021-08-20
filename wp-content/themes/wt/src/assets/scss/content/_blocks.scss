@@ -1,0 +1,64 @@
+#blocks
+{
+	article
+	{
+		position: relative;
+		min-height: rem-calc(692);
+		//text-align: center;
+		
+		header
+		{
+			color: $secondary-color;
+			letter-spacing: 3.29px;
+		}
+	}
+	
+	article.medium-6
+	{
+		min-height: rem-calc(500);
+		
+		header
+		{
+			color: $black;
+			letter-spacing: 2.24px;
+			
+			&,
+			h1
+			{
+				font-size: rem-calc(30);
+				font-weight: $global-weight-bold;
+			}
+		}
+		
+		@include breakpoint(small only)
+		{
+			margin-bottom: 0;
+			
+			+ .medium-6
+			{
+				margin-bottom: $global-margin;
+			}
+		}
+	}
+	
+	//.wt-container
+	//{
+	//	@include absolute-center();
+	//
+	//	width: 100%;
+	//}
+	
+	a
+	{
+		//color: $black;
+		font-size: rem-calc(14);
+		font-weight: 600;
+		letter-spacing: 1.5px;
+		
+		//&:hover,
+		//&:focus
+		//{
+		//	color: $secondary-color;
+		//}
+	}
+}

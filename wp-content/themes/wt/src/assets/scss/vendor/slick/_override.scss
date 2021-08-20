@@ -1,0 +1,303 @@
+@import 'slick';
+@import 'slick-theme';
+
+.wt-slick-container
+{
+	max-width: 100%;
+}
+
+//.slick-slide
+//{
+//	@include disable-mouse-outline;
+//}
+
+[class*=wt-slick] > article + article
+{
+	display: none;
+}
+
+.wt-slick
+{
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	transition: background-image 1s;
+	
+	@include breakpoint(large)
+	{
+		background-attachment: fixed;
+	}
+	
+	//.slick-track
+	//{
+	//	transform: none !important;
+	//}
+	
+	article,
+	a
+	{
+		position: relative;
+		min-height: 75vh;
+		
+		@include breakpoint(xlarge)
+		{
+			min-height: rem-calc(740);
+		}
+	}
+	
+	//article
+	//{
+	//	position: relative;
+	//	//width: 100%;
+	//}
+	
+	a
+	{
+		display: block;
+		height: 100%;
+	}
+	
+	//h1,
+	//.wt-content
+	//{
+	//	p:last-child
+	//	{
+	//		margin-bottom: 0;
+	//	}
+	//}
+	
+	.row
+	{
+		@include breakpoint(large)
+		{
+			@include absolute-center();
+			
+			width: 100%;
+		}
+	}
+	
+	header
+	{
+		//@include absolute-center();
+		//
+		//width: 100%;
+		//margin-bottom: 0;
+		
+		h1
+		{
+			//font-size: rem-calc(44);
+			font-weight: 800;
+			letter-spacing: .0555em; //2.44px;
+			//text-align: center;
+		}
+		//&,
+		//p
+		//{
+		//	line-height: $header-lineheight;
+		//}
+		
+		&,
+		a
+		{
+			color: $black;
+		}
+	}
+	
+	.wt-content
+	{
+		margin-bottom: $global-padding * 2;
+		padding: $global-padding;
+		color: $white;
+		font-size: 1rem;
+		font-weight: 500;
+		letter-spacing: .89px;
+		
+		&,
+		p
+		{
+			line-height: rem-calc(26);
+		}
+		
+		@include breakpoint(medium down)
+		{
+			+ header
+			{
+				position: static;
+				transform: none;
+				margin-top: $global-padding * 2;
+			}
+		}
+		
+		@include breakpoint(large)
+		{
+			position: absolute;
+			max-width: rem-calc(200);
+			padding: rem-calc(42 18);
+		}
+	}
+	
+	@each $size, $gutter in $grid-column-gutter
+	{
+		@include breakpoint($size)
+		{
+			article
+			{
+				padding: $gutter $gutter ($gutter * 4);
+			}
+			
+			.wt-content
+			{
+				top: $gutter;
+				right: $gutter;
+			}
+		}
+	}
+}
+
+.slick-slide img
+{
+	margin: auto;
+}
+
+.slick-dotted.slick-slider
+{
+	margin-bottom: $global-margin;
+}
+
+.slick-dots
+{
+	li
+	{
+		margin: 0;
+		
+		//&,
+		//button
+		//{
+		//	$_width: $slick-dot-size + rem-calc(10);
+		//
+		//	width: $_width;
+		//	height: $_width;
+		//}
+		//
+		//button
+		//{
+		//	position: relative;
+		//}
+		
+		button:before
+		{
+			//@include absolute-center;
+			
+			width: $slick-dot-size;
+			height: $slick-dot-size;
+			right: 0;
+			margin: auto;
+		}
+	}
+	
+	@each $size, $gutter in $grid-column-gutter
+	{
+		@include breakpoint($size)
+		{
+			bottom: $gutter * 2;
+		}
+	}
+}
+
+
+
+.wt-slick-arrows
+{
+	margin-bottom: rem-calc(24);
+	//$padding: rem-calc(30);
+	//
+	//padding-left: $padding;
+	//padding-right: $padding;
+	
+	&.hide-for-medium
+	{
+		.flex-container
+		{
+			width: 100%;
+			margin: 1px;
+		}
+		
+		//.slick-slide //https://github.com/kenwheeler/slick/issues/1868#issuecomment-240413150
+		//{
+		//	overflow: hidden;
+		//	margin-right: 1px;
+		//}
+		//&.slick-slider {
+		//	overflow: hidden;
+		//}
+		//
+		//.slick-list {
+		//	position: relative;
+		//	left: -1px;
+		//}
+	}
+}
+
+.slick-arrow
+{
+	$height: rem-calc(50);
+	
+	height: $height;
+	
+	&:before
+	{
+		font-size: $height;
+	}
+}
+
+//@include breakpoint()
+
+//$left: rem-calc(-38);
+//
+.slick-prev
+{
+	left: 0;
+}
+
+.slick-next
+{
+	right: 0;
+}
+
+
+
+.wt-flex .slick-track
+{
+	display: flex;
+	
+	.slick-slide
+	{
+		display: flex;
+		height: auto;
+		//align-items: center; //optional
+		//justify-content: center; //optional
+	}
+}
+
+
+
+.wt-slick-left
+{
+	.slick-next
+	{
+		display: none !important;
+	}
+}
+
+.wt-slick-right
+{
+	.slick-prev
+	{
+		display: none !important;;
+	}
+}
+
+.slick-arrow
+{
+	z-index: 1;
+}

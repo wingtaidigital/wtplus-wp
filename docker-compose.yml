@@ -1,0 +1,48 @@
+version: '3.1'
+
+services:
+  wordpress:
+    build:
+      context: .
+    ports:
+      - 80:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: revamp
+      PHP_IDE_CONFIG: "serverName=magento_cloud_docker"
+      XDEBUG_CONFIG: "remote_host=172.28.0.1 remote_autostart=1"
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - db
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+
+  db:
+    image: mariadb
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: revamp
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./db:/tmp/db
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 8025:8025
+
+volumes:
+  dbdata:
+    driver: local

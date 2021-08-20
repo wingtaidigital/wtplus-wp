@@ -1,0 +1,1 @@
+"use strict";!function(t){acf.add_filter("wysiwyg_tinymce_settings",function(t,r,c){return c.hasClass("wt-h1")?t.forced_root_block="h1":c.hasClass("wt-h2")&&(t.forced_root_block="h2"),t}),acf.add_filter("color_picker_args",function(t,r){return t.palettes=["#000","#fff","#EFEFF3","#0E14AD","#FF4178","#E9D2D1"],t})}(jQuery);

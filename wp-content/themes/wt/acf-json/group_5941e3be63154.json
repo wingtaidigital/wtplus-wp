@@ -1,0 +1,51 @@
+{
+    "key": "group_5941e3be63154",
+    "title": "Cache",
+    "fields": [
+        {
+            "key": "field_5941e3c471bca",
+            "label": "Select cache to clear",
+            "name": "wt_transients",
+            "type": "checkbox",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": [
+                "_transient_wt_contact_preferences",
+                "_transient_wt_Gold_vouchers",
+                "_transient_wt_ig",
+                "_transient_wt_ig_163",
+                "_transient_wt_vouchers"
+            ],
+            "allow_custom": 0,
+            "save_custom": 0,
+            "default_value": [],
+            "layout": "vertical",
+            "toggle": 0,
+            "return_format": "value"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-clear-wt-cache"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1497491116
+}

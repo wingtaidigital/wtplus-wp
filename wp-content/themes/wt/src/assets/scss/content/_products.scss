@@ -1,0 +1,85 @@
+#products
+{
+	$padding: rem-calc(38);
+	
+	padding-top: $padding;
+	padding-bottom: $padding;
+	
+	//.show-for-medium div.column
+	//{
+	//	max-width: 33.3333%;
+	//}
+	
+	header h1
+	{
+		color: $white;
+		font-size: rem-calc(30);
+		letter-spacing: 2.24px;
+		line-height: 1.6;
+	}
+	
+	article h1,
+	.wt-content
+	{
+		margin-bottom: rem-calc(7);
+	}
+	
+	article h1
+	{
+		color: $dark-gray;
+		font-size: rem-calc(15);
+		letter-spacing: 2.14px;
+		text-transform: uppercase;
+	}
+	
+	.wt-content
+	{
+		//font-size: rem-calc(13);
+		letter-spacing: 1px;
+		//line-height: 1.5385;
+	}
+	
+	a
+	{
+		//color: $black;
+		font-size: rem-calc(14);
+		font-weight: 600;
+		letter-spacing: 1.39px;
+	}
+}
+
+
+
+.single-wt_product main
+{
+	h2,
+	span.wt-h3
+	{
+		font-weight: $global-weight-normal;
+	}
+	
+	.row.collapse > .column.wt-background-light-gray
+	{
+		@include breakpoint(large)
+		{
+			padding-left: $global-padding;
+			padding-right: $global-padding;
+		}
+	}
+	
+	.slick-slide
+	{
+		font-size: 0;
+	}
+	
+	.wt-relative
+	{
+		display: inline-block;
+	}
+	
+	.wt-zoom
+	{
+		max-height: rem-calc(600);
+		width: auto;
+	}
+}
