@@ -82,6 +82,10 @@ Theme Name: wt+
 .n2-ow{
     background-color: #44586E;
 }
+.home .wt-gutter-vertical-x2{
+    padding-top:0;
+    padding-bottom: 0;
+}
 @media(min-width:1024px){
     .top-bar, 
     .top-bar ul{
