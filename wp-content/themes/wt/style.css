@@ -105,9 +105,10 @@ Theme Name: wt+
 .brands-logo .elementor-widget-image{
     flex:0 0 auto;
     max-width:116px;
-    margin:5px;
+    margin:5px !important;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 .articles{
     margin-bottom: 40px;
@@ -201,6 +202,73 @@ Theme Name: wt+
     transform: rotate(135deg);
     right: 14px;
     top: 12px;
+}
+/* Editorial
+------------------------------------------------ */
+.sp-pcp-post .sp-pcp-post-content .sp-pcp-readmore a{
+    border:none;
+    padding:0;
+    color:#000;
+}
+.sp-pcp-post .sp-pcp-title a, .sp-pcp-post .sp-pcp-title{
+    font-size:24px;
+}
+.pcp-carousel-wrapper .pcp-button-prev{
+    position: absolute;
+    top:50% !important;
+    border-radius:50%;
+    height:35px !important;
+    width:35px !important;
+    left:0 !important;
+    right:auto !important;
+}
+.pcp-carousel-wrapper .pcp-button-next{
+    position: absolute;
+    top:50% !important;
+    border-radius:50%;
+    height:35px !important;
+    width:35px !important;
+}
+.pcp-carousel-wrapper .pcp-button-prev i,
+.pcp-carousel-wrapper .pcp-button-next i{
+    display:none;
+}
+.pcp-carousel-wrapper .pcp-button-prev:before,
+.pcp-carousel-wrapper .pcp-button-next:before{
+    content:'';
+    display: inline-block;
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: transparent;
+    text-indent: -9999px;
+    border-top: 2px solid #000;
+    border-left: 2px solid #000;
+    transition: all 250ms ease-in-out;
+    text-decoration: none;
+    color: transparent;
+}
+.pcp-carousel-wrapper .pcp-button-prev:before{
+    transform: rotate(-45deg);
+    left: 14px;
+    top:12px;
+}
+.pcp-carousel-wrapper .pcp-button-next:before{
+    transform: rotate(135deg);
+    right: 14px;
+    top: 12px;
+}
+.n2-section-smartslider div#n2-ss-2 .n2-ss-slider-1{
+    min-height:540px;
+}
+.pcp-carousel-wrapper .sp-pcp-carousel .pcp-pagination.swiper-pagination-bullets{
+    display:none;
+}
+.sp-pcp-section .pcp-section-title{
+    text-align: center;
+}
+.editorial-banner{
+    margin-bottom:50px !important;
 }
 @media(min-width:1024px){
     .top-bar, 
@@ -304,4 +372,23 @@ Theme Name: wt+
         -ms-flex-preferred-size: 100%;
         width:100%;
     }
+    .n2-section-smartslider .n2-ss-slider .n2-ss-slide-background-image img{
+        height:auto !important;
+    }
+    .n2-section-smartslider div#n2-ss-2 .n2-ss-slider-1{
+        min-height:160px;
+    }
+    .brands{
+        padding:30px 0;
+    }
+    .eael-post-appender{
+        grid-template-columns: 1fr;
+    }
+    body>footer{
+        padding:30px 0;
+    }
+    #instagram{
+        padding-bottom:30px;
+    }
+    
 }
