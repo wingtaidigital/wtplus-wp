@@ -394,10 +394,12 @@ function wt_has_transactions_today($mode = 20)
  */
 function wt_has_flash_deal_transactions($transaction_lists, $ref7)
 {
-    foreach ($transaction_lists as $item) {
-        if ($item['Ref7'] == $ref7) {
-            return true;
-            break;
+    if (is_array($transaction_lists)) {
+        foreach ($transaction_lists as $item) {
+            if ($item['Ref7'] == $ref7) {
+                return true;
+                break;
+            }
         }
     }
     return false;
@@ -412,12 +414,14 @@ function wt_has_flash_deal_transactions($transaction_lists, $ref7)
  */
 function wt_has_normal_transactions($item_lists, $transaction_lists)
 {
-    foreach ($transaction_lists as $trn) {
-        foreach ($item_lists as $item) {
-            if ($item['Level_Code'] != 'FlashDeal') {
-                if ($trn['Ref7'] == $item['AlternateID']) {
-                    return true;
-                    break;
+    if (is_array($transaction_lists)) {
+        foreach ($transaction_lists as $trn) {
+            foreach ($item_lists as $item) {
+                if ($item['Level_Code'] != 'FlashDeal') {
+                    if ($trn['Ref7'] == $item['AlternateID']) {
+                        return true;
+                        break;
+                    }
                 }
             }
         }
