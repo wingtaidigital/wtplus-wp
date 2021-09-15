@@ -392,3 +392,16 @@ Theme Name: wt+
     }
     
 }
+
+.title-bar .custom-logo{
+    max-width: 3.73333rem;
+    max-height: 1.36667rem;
+    width: 7.46667rem;
+    height: 2.73333rem;
+}
+.top-bar .large-horizontal>li>a{
+    text-transform:uppercase;
+}
+.top-bar .large-horizontal>li#menu-item-11177>a{
+    text-transform:initial;
+}
