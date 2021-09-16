@@ -706,6 +706,8 @@ register_rest_route('wt/v1', '/crm/customers/(?P<MemberID>\w+)', array(
 				"MembershipStatusCode" => "ACTIVE",
 			]);
 		}
+
+		return $response;
 	},
 	'args' => wp_parse_args([
 		'children' => [
@@ -905,6 +907,7 @@ register_rest_route('wt/v1', '/crm/forgot-password', [
 			}
 		}
 
+		return $response;
 		// if (isset($response['ReturnMessage']))
 		// 	return new WP_Error('wt_500', $response['ReturnMessage']);
 	},
