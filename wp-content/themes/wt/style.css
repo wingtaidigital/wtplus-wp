@@ -405,3 +405,28 @@ Theme Name: wt+
 .top-bar .large-horizontal>li#menu-item-11177>a{
     text-transform:initial;
 }
+@media(max-width:767px){
+    div#n2-ss-1 .n2-ss-slider-1{min-height:160px;}
+    .title-bar .custom-logo{
+        max-width: 3.73333rem;
+        max-height: 1.36667rem;
+        width: 7.46667rem;
+        height: 2.73333rem;
+    }
+    .elementor-widget-eael-post-grid .eael-entry-title{line-height:1.2; }
+}
+[data-horizontal=center] .ws-po-arrow,
+[data-horizontal=right] .ws-po-arrow{
+    left: 1.53846em;
+    right:auto;
+}
+
+.input-picker.ws-size-1 .picker-list{
+    float:left;
+    width:22.30769em;
+}
+.input-picker .ws-po-box{
+    margin-left: -1em;
+    float:left;
+}
+.select2-container{max-width:100%;}
