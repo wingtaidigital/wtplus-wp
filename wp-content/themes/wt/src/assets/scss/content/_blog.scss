@@ -1,0 +1,203 @@
+.page-blog,
+.blog,
+.category,
+.tag
+{
+	main
+	{
+		background-color: $light-gray;
+		
+		.menu
+		{
+			li
+			{
+				border-bottom: 3px solid transparent;
+				font-size: rem-calc(15);
+				font-weight: 600;
+			}
+			
+			.is-active
+			{
+				border-color: $anchor-color;
+				
+				@include breakpoint(small only)
+				{
+					margin-bottom: rem-calc(17);
+					
+					a
+					{
+						padding-bottom: 0;
+					}
+				}
+			}
+			
+			a
+			{
+				padding-top: 0;
+				//padding-bottom: 0;
+				color: $body-font-color;
+			}
+		}
+		
+		.wt-margin-bottom
+		{
+			margin-bottom: 2rem;
+		}
+	}
+}
+
+.page-blog
+{
+	#header
+	{
+		min-height: rem-calc(615);
+		color: $white;
+		
+		h1
+		{
+			font-size: rem-calc(30);
+			font-weight: 700;
+			letter-spacing: rem-calc(10);
+			text-transform: uppercase;
+		}
+		
+		.wt-cta
+		{
+			text-transform: uppercase;
+		}
+	}
+}
+
+.single-post main
+{
+	header
+	{
+		h1
+		{
+			font-size: rem-calc(40);
+			font-weight: 700;
+		}
+		
+		h2
+		{
+			font-size: rem-calc(20);
+			font-weight: 500;
+			margin-top: rem-calc(20);
+		}
+	}
+	
+	.wt-content
+	{
+		font-size: rem-calc(15);
+		
+		h2
+		{
+			font-size: rem-calc(18);
+		}
+		
+		a:hover,
+		a:focus
+		{
+			text-decoration: underline;
+		}
+	}
+	
+	.wt-content > *,
+	footer > section
+	{
+		margin-bottom: rem-calc(50);
+	}
+	
+	figure
+	{
+		//h1
+		//{
+		//	font-size: 1rem;
+		//}
+		
+		img
+		{
+			//display: block;
+			margin: 0 auto 1rem;
+		}
+		
+		@include breakpoint(small only)
+		{
+			margin-bottom: 2rem;
+			text-align: center;
+		}
+	}
+	
+	footer
+	{
+		h1,
+		strong
+		{
+			line-height: 1.6;
+		}
+		
+		h1
+		{
+			font-size: 1rem;
+			text-transform: uppercase;
+		}
+		
+		[rel="tag"]
+		{
+			&:hover,
+			&:focus
+			{
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+.wt-post
+{
+	.column
+	{
+		min-height: rem-calc(341);
+	}
+	
+	[rel="tag"]
+	{
+		border: rem-calc(1) solid $anchor-color;
+		padding: 0 .7em;
+		font-size: rem-calc(12);
+		font-weight: 700;
+		letter-spacing: rem-calc(2);
+		text-transform: uppercase;
+		
+		&:hover,
+		&:focus
+		{
+			background-color: $anchor-color;
+			color: $white;
+		}
+	}
+	
+	@include breakpoint(medium)
+	{
+		.flex-container
+		{
+			align-items: center;
+		}
+	}
+}
+
+
+
+.wt-question
+{
+	color: $secondary-color;
+	font-weight: $global-weight-bold;
+}
+
+
+
+div.shareaholic-share-buttons-container ul.shareaholic-share-buttons
+{
+	margin-left: 0 !important;
+	padding: 0 !important;
+}

@@ -1,0 +1,36 @@
+@media print
+{
+	body
+	{
+		padding-top: 0;
+		
+		> header
+		{
+			position: static;
+		}
+	}
+	
+	#main-menu
+	{
+		display: block !important;
+		
+		ul ul
+		{
+			display: none;
+		}
+	}
+	
+	#main-menu,
+	footer
+	{
+		*
+		{
+			color: $white !important;
+		}
+	}
+	
+	.button
+	{
+		text-decoration: none;
+	}
+}

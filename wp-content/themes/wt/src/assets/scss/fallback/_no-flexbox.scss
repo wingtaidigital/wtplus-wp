@@ -1,0 +1,7 @@
+.no-flexbox
+{
+	.flex-container > .flex-container
+	{
+		max-width: 100%;
+	}
+}

@@ -1,0 +1,24 @@
+.no-flexwrap
+{
+	@include foundation-grid;
+	
+	//@include breakpoint(medium)
+	//{
+	//	.show-for-medium .column
+	//	{
+	//		float: left;
+	//	}
+	//}
+	
+	@include breakpoint(large)
+	{
+		.column
+		{
+			&.large-expand,
+			&.shrink
+			{
+				width: auto;
+			}
+		}
+	}
+}

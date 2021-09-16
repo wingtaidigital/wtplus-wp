@@ -1,0 +1,92 @@
+{
+    "key": "group_58dda634b8f93",
+    "title": "Contact Form",
+    "fields": [
+        {
+            "key": "field_58dda6b39019b",
+            "label": "Mobile",
+            "name": "wt_mobile",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_594b069038cba",
+            "label": "Nature of Feedback",
+            "name": "wt_nature",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "Feedback (Products)": "Feedback (Products)",
+                "Feedback (Service)": "Feedback (Service)",
+                "Compliments": "Compliments",
+                "Membership": "Membership",
+                "Career Opportunities": "Career Opportunities",
+                "Product enquiries": "Product enquiries",
+                "Others": "Others"
+            },
+            "default_value": [],
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "ajax": 0,
+            "return_format": "value",
+            "placeholder": ""
+        },
+        {
+            "key": "field_594b090eecc94",
+            "label": "Subject",
+            "name": "wt_subject",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "comment",
+                "operator": "==",
+                "value": "wt_brand"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1498090400
+}

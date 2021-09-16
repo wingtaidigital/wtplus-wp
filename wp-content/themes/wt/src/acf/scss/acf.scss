@@ -1,0 +1,36 @@
+.wt-divider .acf-row > td
+{
+	border-top-width: 1rem;
+}
+
+.wt-max-height .acf-editor-wrap iframe
+{
+	height: 100px !important;
+	min-height: 100px;
+}
+
+.wt-max-height .wp-editor-area
+{
+	height: 100px !important;
+}
+
+.post-type-wt_event [data-name="user"] .select2-container
+{
+	pointer-events: none;
+}
+
+.post-type-wt_event .acf-row-handle
+{
+	display: none;
+}
+
+.post-type-wt_store #post-body-content
+{
+	margin-bottom: 0;
+}
+
+[data-taxonomy="wt_region"] ul.acf-checkbox-list li
+{
+	display: inline-block;
+	margin-right: 1rem;
+}

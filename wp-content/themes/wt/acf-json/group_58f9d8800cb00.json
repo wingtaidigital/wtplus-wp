@@ -1,0 +1,155 @@
+{
+    "key": "group_58f9d8800cb00",
+    "title": "Password Policy",
+    "fields": [
+        {
+            "key": "field_58f9d889c1941",
+            "label": "Password Minimum Length",
+            "name": "wt_password_min_length",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "characters",
+            "min": 1,
+            "max": "",
+            "step": ""
+        },
+        {
+            "key": "field_58fabb0d40384",
+            "label": "Password Must Contain",
+            "name": "wt_password_complexity",
+            "type": "checkbox",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "d": "digit",
+                "[a-z]": "lowercase character",
+                "[A-Z]": "uppercase character",
+                "W": "special character"
+            },
+            "allow_custom": 0,
+            "save_custom": 0,
+            "default_value": [],
+            "layout": "horizontal",
+            "toggle": 0,
+            "return_format": "array"
+        },
+        {
+            "key": "field_58f9d905c1942",
+            "label": "Password History",
+            "name": "wt_password_history",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "passwords",
+            "min": 1,
+            "max": "",
+            "step": ""
+        },
+        {
+            "key": "field_58f9dab7c1943",
+            "label": "Password Minimum Days",
+            "name": "wt_password_min_age",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "days",
+            "min": 0,
+            "max": "",
+            "step": ""
+        },
+        {
+            "key": "field_58f9dad7c1944",
+            "label": "Password Expiry",
+            "name": "wt_password_max_age",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "days",
+            "min": 1,
+            "max": "",
+            "step": ""
+        },
+        {
+            "key": "field_58f9dbaec1945",
+            "label": "Account Lockout Threshold",
+            "name": "wt_lockout_threshold",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "incorrect passwords",
+            "min": 1,
+            "max": "",
+            "step": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-wt-password-policy"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1527244586
+}

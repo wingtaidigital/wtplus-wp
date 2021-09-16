@@ -1,0 +1,75 @@
+#store-locator
+{
+	//label,
+	//h2
+	//{
+	//	font-size: rem-calc(15);
+	//	font-weight: $global-weight-bold;
+	//}
+	
+	select
+	{
+		height: rem-calc(49);
+		margin-bottom: 0;
+		background-color: #D7D7D7;
+		color: #4D5B69;
+		font-size: rem-calc(16);
+		font-weight: 600;
+		letter-spacing: .7px;
+	}
+	
+	article
+	{
+		h1,
+		p
+		{
+			color: $black;
+		}
+		
+		h1
+		{
+			font-size: rem-calc(13);
+			font-weight: $global-weight-bold;
+			line-height: $list-lineheight;//$global-lineheight;
+		}
+	}
+	
+	@include breakpoint(large)
+	{
+		> .column:first-child
+		{
+			max-height: rem-calc(700);
+			overflow: auto;
+		}
+	}
+}
+
+#map
+{
+	height: rem-calc(400);
+	
+	@include breakpoint(large)
+	{
+		height: 100%;
+	}
+}
+
+#stores
+{
+	article:hover,
+	article:focus,
+	.is-active
+	{
+		background-color: get-color(pink);
+	}
+}
+
+.gm-style .gm-style-iw
+{
+	font-weight: 800;
+}
+
+//.gm-style-iw + div
+//{
+//	display: none;
+//}

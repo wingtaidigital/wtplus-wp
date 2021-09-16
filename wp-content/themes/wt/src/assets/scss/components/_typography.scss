@@ -1,0 +1,202 @@
+blockquote
+{
+	font-size: $cite-font-size;
+	font-weight: 100;
+	letter-spacing: rem-calc(1);
+	line-height: 1.3889;
+	border: rem-calc(1) solid $secondary-color;
+	
+	&:before
+	{
+		font-family: icomoon;
+		font-size: rem-calc(29);
+		color: $secondary-color;
+		content: "\e90d";
+		margin-right: rem-calc(15);
+	}
+	
+	@include breakpoint(medium)
+	{
+		padding: rem-calc(50 100);
+	}
+}
+
+cite
+{
+	font-style: normal;
+}
+
+
+
+.wt-text-secondary
+{
+	color: $secondary-color !important;
+}
+
+.wt-text-black
+{
+	&/*,
+	a*/
+	{
+		color: $black;
+	}
+}
+
+.wt-text-white
+{
+	color: $white;
+}
+
+.wt-text-hover
+{
+	//color: $black;
+	
+	&:hover,
+	&:focus
+	{
+		text-decoration: underline;
+		//color: $anchor-color !important;
+	}
+	
+	&.wt-bold
+	{
+		font-weight: 600;
+	}
+	
+	//.home article &
+	//{
+	//	font-size: rem-calc(14);
+	//	font-weight: 600;
+	//	letter-spacing: rem-calc(1.5);
+	//}
+}
+
+.wt-cta
+{
+	color: $anchor-color;
+	
+	&,
+	> span
+	{
+		&:hover,
+		&:focus
+		{
+			text-decoration: underline;
+		}
+	}
+}
+
+.wt-text-transparent
+{
+	color: transparent;
+}
+
+
+
+.wt-case-sensitive
+{
+	text-transform: none;
+}
+
+.wt-upper
+{
+	text-transform: uppercase;
+}
+
+
+
+.wt-text-bold
+{
+	font-weight: bold;
+}
+
+.wt-text-normal
+{
+	font-weight: $global-weight-normal !important;
+}
+
+
+
+.wt-underline
+{
+	color: $black;
+	text-decoration: underline;
+}
+
+
+
+.wt-generic
+{
+	h2
+	{
+		font-size: rem-calc(map-deep-get($header-styles, small, h5, font-size)) !important;;
+		margin-bottom: $paragraph-margin-bottom * 2;
+	}
+	
+	h3
+	{
+		color: $anchor-color;
+		font-size: 1rem;
+		margin-bottom: $paragraph-margin-bottom;
+	}
+	
+	p,
+	ol,
+	ul
+	{
+		+ h3
+		{
+			margin-top: $paragraph-margin-bottom * 2;
+		}
+	}
+}
+
+
+
+.wt-h2
+{
+	font-size: rem-calc(map-deep-get($header-styles, small, h2, font-size)) !important;
+	font-weight: $global-weight-bold;
+	letter-spacing: rem-calc(2.24);
+}
+
+.wt-h3
+{
+	font-size: rem-calc(map-deep-get($header-styles, small, h3, font-size)) !important;
+	font-weight: $global-weight-bold;
+	letter-spacing: rem-calc(1.7);
+	line-height: $global-lineheight;
+}
+
+//.wt-h4
+//{
+//	font-size: rem-calc(map-deep-get($header-styles, small, h4, font-size)) !important;
+//	font-weight: $global-weight-bold;
+//}
+
+.wt-h6
+{
+	font-size: rem-calc(map-deep-get($header-styles, small, h6, font-size)) !important;
+	font-weight: 800;
+	letter-spacing: rem-calc(2.2);
+}
+
+
+
+.icon-perm_contact_calendar
+{
+	font-size: rem-calc(20);
+	vertical-align: sub;
+	margin-right: .3rem;
+}
+
+
+
+.post-type-archive-wt_lookbook,
+.single-wt_lookbook
+{
+	main .wt-absolute
+	{
+		font-size: rem-calc(15);
+	}
+}

@@ -1,0 +1,31 @@
+#instagram
+{
+	$padding: rem-calc(63);
+	
+	padding-top: $padding;
+	padding-bottom: $padding;
+	
+	h1
+	{
+		margin-bottom: rem-calc(39);
+		font-size: rem-calc(30);
+		font-weight: $global-weight-bold;
+		letter-spacing: 2.24px;
+	}
+	
+	a
+	{
+		//color: $black;
+		font-size: rem-calc(14);
+		font-weight: 600;
+		letter-spacing: 1.39px;
+	}
+	
+	@include breakpoint(small only)
+	{
+		.wt-gutter
+		{
+			@include wt-gutter(2);
+		}
+	}
+}
