@@ -1232,10 +1232,13 @@ switch ( $action ) {
 				} elseif ( ! $user->has_cap( 'edit_posts' ) ) {
 					$redirect_to = $user->has_cap( 'read' ) ? admin_url( 'profile.php' ) : home_url();
 				}
-
 				wp_redirect( $redirect_to );
 				exit;
 			}
+
+			if (false !== strpos( $redirect_to, 'wp-admin' )) {
+                $redirect_to = user_admin_url();
+            }
 
 			wp_safe_redirect( $redirect_to );
 			exit;

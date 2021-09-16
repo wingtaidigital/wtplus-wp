@@ -41,7 +41,7 @@ add_action('rest_api_init', function ($wp_rest_server) {
         $phpmailer->SMTPAuth = true;
         //Provide username and password
         $phpmailer->Username = "noreply@wtplus.com.sg";
-        $phpmailer->Password = "noreply1234";
+        $phpmailer->Password = "wt+$$888";
         //If SMTP requires TLS encryption then set it
         $phpmailer->SMTPSecure = "tls";
         //Set TCP port to connect to
@@ -55,7 +55,7 @@ add_action('rest_api_init', function ($wp_rest_server) {
     add_action('wp_mail_failed', 'log_mailer_errors', 10, 1);
     function log_mailer_errors($wp_error)
     {
-        $fn = ABSPATH . '/mail.log'; // say you've got a mail.log file in your server root
+        $fn = ABSPATH . 'wp-content/mail.log'; // say you've got a mail.log file in your server root
         $fp = fopen($fn, 'a');
         fputs($fp, "Mailer Error: " . $wp_error->get_error_message() . "\n");
         fclose($fp);
