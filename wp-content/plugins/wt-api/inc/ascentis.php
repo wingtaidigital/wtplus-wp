@@ -860,7 +860,7 @@ register_rest_route('wt/v1', '/crm/forgot-password', [
 					if (is_wp_error($password))
 						return $password;
 
-					return;
+					return $response;
 				}
 
 				if (!empty($params['MobileNo']))
@@ -990,8 +990,11 @@ register_rest_route('wt/v1', '/crm/vouchers/(?P<VoucherTypeCode>\w+)', [
 			'CPH4'				=> isset($issue['IssuedVoucherLists'][0]['TypeValue']) ? $issue['IssuedVoucherLists'][0]['TypeValue'] : null
 		]);
 
-		if (is_wp_error($email))
-			return $email;
+		if (is_wp_error($email)) {
+            return $email;
+        }
+
+		return $member;
 	},
 	/*'args' => array(
 		'VoucherQty' => array(
