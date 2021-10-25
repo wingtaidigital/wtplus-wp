@@ -135,11 +135,11 @@ global $profile, $card;
 	<?php } ?>
 	
 	<?php if (!is_wp_error($enquiry) && $enquiry['CardInfo']['NettToNextTier']) { ?>
-		<div>
-			Spend <span class="wt-text-secondary">$<?php echo number_format_i18n($enquiry['CardInfo']['NettToNextTier'], 2); ?></span> by
-			<span class="wt-text-secondary"><?php echo $expiry_date; ?></span>
-			to upgrade to <?php echo $tier['next_label']; ?>
-		</div>
+<!--		<div>-->
+<!--			Spend <span class="wt-text-secondary">$--><?php //echo number_format_i18n($enquiry['CardInfo']['NettToNextTier'], 2); ?><!--</span> by-->
+<!--			<span class="wt-text-secondary">--><?php //echo $expiry_date; ?><!--</span>-->
+<!--			to upgrade to --><?php //echo $tier['next_label']; ?>
+<!--		</div>-->
 	<?php } ?>
 	
 <!--	--><?php //echo $card['TierCode']; ?><!-- Tier expiry date: --><?php //echo wt_crm_format_date($card['ExpiryDate'], 'display'); ?>

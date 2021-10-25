@@ -278,7 +278,7 @@ add_filter('wp_authenticate_user', function($user, $password)
 		return $user;
 	
 	if ((int) $failed_logins > (int) $threshold)
-		return new WP_Error('wt_lockout', 'Your account has been locked. Please <a href="' . add_query_arg('reset', '', home_url('showcase/forgot-password')) . '">reset your password</a>.', ['status' => 400]);
+		return new WP_Error('wt_lockout', 'Your account has been locked. Please <a href="' . add_query_arg('reset', '', home_url('forgot-password')) . '">reset your password</a>.', ['status' => 400]);
 	
 	return $user;
 }, 10, 2);
