@@ -81,15 +81,15 @@ global $profile, $card;
 			'next_label' => 'Gold'
 			
 		],
-//		'Gold'    => [
-//			'renew'      => 300,
-//			'next_tier'  => 1000,
-//			'next_label' => 'Premium'
-//		],
-//		'Premium' => [
-//			'renew'      => 1000,
-//			'next_label' => 'Renew Premium'
-//		],
+		'Gold'    => [
+			'renew'      => 300,
+			'next_tier'  => 1000,
+			'next_label' => 'Premium'
+		],
+		'Premium' => [
+			'renew'      => 1000,
+			'next_label' => 'Renew Premium'
+		],
 	];
 	$tier = $tiers[ucfirst($card['TierCode'])];
 	$max = empty($tier['next_tier']) ? $tier['renew'] : $tier['next_tier'];
