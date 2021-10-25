@@ -86,10 +86,10 @@ global $profile, $card;
 			'next_tier'  => 1000,
 			'next_label' => 'Premium'
 		],
-		'Premium' => [
-			'renew'      => 1000,
-			'next_label' => 'Renew Premium'
-		],
+//		'Premium' => [
+//			'renew'      => 1000,
+//			'next_label' => 'Renew Premium'
+//		],
 	];
 	$tier = $tiers[ucfirst($card['TierCode'])];
 	$max = empty($tier['next_tier']) ? $tier['renew'] : $tier['next_tier'];
@@ -134,12 +134,12 @@ global $profile, $card;
 		</div>
 	<?php } ?>
 	
-	<?php if (!is_wp_error($enquiry) && $enquiry['CardInfo']['NettToNextTier']) { ?>
-<!--		<div>-->
-<!--			Spend <span class="wt-text-secondary">$--><?php //echo number_format_i18n($enquiry['CardInfo']['NettToNextTier'], 2); ?><!--</span> by-->
-<!--			<span class="wt-text-secondary">--><?php //echo $expiry_date; ?><!--</span>-->
-<!--			to upgrade to --><?php //echo $tier['next_label']; ?>
-<!--		</div>-->
+	<?php if (!is_wp_error($enquiry) && $enquiry['CardInfo']['NettToNextTier'] && $card['TierCode'] !== 'Gold') { ?>
+		<div>
+			Spend <span class="wt-text-secondary">$<?php echo number_format_i18n($enquiry['CardInfo']['NettToNextTier'], 2); ?></span> by
+			<span class="wt-text-secondary"><?php echo $expiry_date; ?></span>
+			to upgrade to <?php echo $tier['next_label']; ?>
+		</div>
 	<?php } ?>
 	
 <!--	--><?php //echo $card['TierCode']; ?><!-- Tier expiry date: --><?php //echo wt_crm_format_date($card['ExpiryDate'], 'display'); ?>
