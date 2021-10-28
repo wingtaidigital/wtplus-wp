@@ -430,3 +430,66 @@ Theme Name: wt+
     float:left;
 }
 .select2-container{max-width:100%;}
+
+/* 28-10-2021 */
+@media(max-width:767px){
+    div#n2-ss-1 .n2-ss-slider-1{
+        min-height:160px;
+    }
+    .title-bar .custom-logo{
+        max-width: 3.73333rem;
+        max-height: 1.36667rem;
+        width: 7.46667rem;
+        height: 2.73333rem;
+    }
+    .elementor-widget-eael-post-grid .eael-entry-title{
+        line-height:1.2; 
+    }
+}
+[data-horizontal=center] .ws-po-arrow,
+[data-horizontal=right] .ws-po-arrow{
+    left: 1.53846em;
+    right:auto;
+}
+
+.input-picker.ws-size-1 .picker-list{
+    float:left;
+    width:22.30769em;
+}
+.input-picker .ws-po-box{
+    margin-left: -1em;
+    float:left;
+}
+.select2-container{
+    max-width:100%;
+}
+    
+.top-bar .large-horizontal>li#menu-item-38006>a{
+    text-transform:initial;
+}
+    
+@media(max-width:1024px){
+    .title-bar {
+        background-color: #fff;
+    }
+    .menu-icon:after{
+        background: #000;
+        box-shadow: 0 7px 0 #000, 0 14px 0 #000;
+    }
+    .title-bar [data-toggle="header-search"] {
+        color: #000;
+    }
+    body>footer{
+        background-color: #fff;
+        color:#000;
+    }
+    body>footer, body>footer a, body>footer a:focus, body>footer a:hover{
+        color:#000;
+    }
+    body>footer small{
+        display:block;
+    }
+    .wt-h3{
+        font-size:36px !important;
+    }
+}
