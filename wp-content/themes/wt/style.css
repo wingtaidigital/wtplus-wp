@@ -467,7 +467,15 @@ Theme Name: wt+
 .top-bar .large-horizontal>li#menu-item-38006>a{
     text-transform:initial;
 }
-    
+body{
+    padding-top:0px !important;
+} 
+body, html{
+    height:auto;
+}
+body>header{
+    position: sticky;
+}
 @media(max-width:1024px){
     .title-bar {
         background-color: #fff;
