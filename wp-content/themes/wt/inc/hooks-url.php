@@ -33,17 +33,17 @@
 
 
 
-function wt_login_form_resetpass()
-{
-	if ('GET' == $_SERVER['REQUEST_METHOD'])
-	{
-		$redirect_to = home_url('showcase/reset-password/');
-		$redirect_to = add_query_arg( 'login', $_GET['login'], $redirect_to );
-		$redirect_to = add_query_arg( 'key', $_GET['key'], $redirect_to );
-		
-		wp_redirect($redirect_to);
-		exit;
-	}
-}
-add_action( 'login_form_rp', 'wt_login_form_resetpass' );
-add_action( 'login_form_resetpass', 'wt_login_form_resetpass' );
+//function wt_login_form_resetpass()
+//{
+//	if ('GET' == $_SERVER['REQUEST_METHOD'])
+//	{
+//		//$redirect_to = home_url('showcase/reset-password/');
+//		$redirect_to = add_query_arg( 'login', $_GET['login'], $redirect_to );
+//		$redirect_to = add_query_arg( 'key', $_GET['key'], $redirect_to );
+//
+//		wp_redirect($redirect_to);
+//		exit;
+//	}
+//}
+//add_action( 'login_form_rp', 'wt_login_form_resetpass' );
+//add_action( 'login_form_resetpass', 'wt_login_form_resetpass' );
