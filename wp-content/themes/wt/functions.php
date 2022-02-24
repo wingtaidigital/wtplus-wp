@@ -237,7 +237,12 @@ if (!function_exists('insta_tag'))
                 <div class="text-center wt-gutter">
                     <!-- SnapWidget -->
                     <script src="https://snapwidget.com/js/snapwidget.js"></script>
-                    <iframe src="https://snapwidget.com/embed/928039" class="snapwidget-widget" allowtransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%;"></iframe>
+                    <div class="mobile-snapwidget">
+                        <iframe src="https://snapwidget.com/embed/986763" class="snapwidget-widget" allowtransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden;  width:100%; "></iframe>
+                    </div>
+                    <div class="desktop-snapwidget">
+                        <iframe src="https://snapwidget.com/embed/928039" class="snapwidget-widget" allowtransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%;"></iframe>
+                    </div>
                 </div>
 
                 <div class="text-right wt-gutter">
